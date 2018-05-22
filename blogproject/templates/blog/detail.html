@@ -1,0 +1,79 @@
+﻿{% extends 'base.html' %}
+
+{% load staticfiles %}
+<!--
+    static 模板标签位于 staticfiles 模块中,只有通过 load 模板标签将该模块引入后,
+    才能在模板中使用 { % static % } 标签.
+    用 { % % } 包裹起来的叫做模板标签,用 { { } } 包裹起来的叫做模板变量,其作用是在最终渲染的模板里显示由视图函数传过来的变量值.
+-->
+
+{% block my_detail %}
+
+    {% if article.toc %}
+
+        <div class="my-detail">
+
+            <div class="white-spacing-new">
+                <h1>目&nbsp&nbsp&nbsp录</h1>
+                <span>{{ article.toc | safe }}</span>
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <div class="my-detail">
+
+            <div class="white-spacing">
+                <h1>CHENHUAN</h1>
+                <span>{{ sentence.sentence }}</span>
+            </div>
+
+            <ul class="social-link">
+                <li><a href="#" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="https://github.com/zhiduanqingchang" target="_blank" class="github"><i
+                        class="fa fa-github"></i></a></li>
+            </ul>
+
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block sub_title %}
+
+    <div class="sub-title">
+        <h2>详情</h2>
+        <a href="{% url 'blog:index' %}"><i class="icon-home"></i></a>
+    </div>
+
+{% endblock %}
+
+{% block content_page %}
+
+    <div class="col-md-12 content-page">
+        <div class="col-md-12 blog-post">
+
+            <!-- Post Headline Start -->
+            <div class="post-title">
+                <h1>{{ article.title }}</h1>
+            </div>
+            <!-- Post Headline End -->
+
+            <!-- Post Detail Start -->
+            <div class="post-info">
+                <span>{{ article.created_time | date:"F j, Y" }} / by {{ article.author }}</span>
+            </div>
+            <!-- Post Detail End -->
+
+            <p>{{ article.body | safe }}</p>
+
+        </div>
+    </div>
+
+{% endblock %}

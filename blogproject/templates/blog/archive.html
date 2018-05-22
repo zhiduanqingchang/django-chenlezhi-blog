@@ -1,0 +1,55 @@
+﻿{% extends 'base.html' %}
+
+{% load staticfiles %}
+<!--
+    static 模板标签位于 staticfiles 模块中,只有通过 load 模板标签将该模块引入后,
+    才能在模板中使用 { % static % } 标签.
+    用 { % % } 包裹起来的叫做模板标签,用 { { } } 包裹起来的叫做模板变量,其作用是在最终渲染的模板里显示由视图函数传过来的变量值.
+-->
+{% load article_filter %}
+
+{% block title %}归档-倦了请直说{% endblock %}
+
+{% block sub_title %}
+
+    <div class="sub-title">
+        <h2>归档</h2>
+        <a href="{% url 'blog:index' %}"><i class="icon-home"></i></a>
+    </div>
+
+{% endblock %}
+
+{% block content_page %}
+
+    <div class="col-md-12 content-page">
+        <div class="col-md-12 blog-post">
+
+            <!-- My Service Start -->
+            {% for year,month_list in date_archive %}
+                <div class="post-title">
+                    <h1><span class="main-color">{{ year }} 年</span></h1>
+                </div>
+                {% for month in month_list %}
+                    <div class="post-title">
+                        <h1><span class="main-color">{{ month }} 月</span></h1>
+                    </div>
+                    <div class="list list-style-2 margin-top-30">
+                        <ul>
+                            {% article_filter article_list created_time__year=year created_time__month=month as articles %}
+                            {% for article in articles %}
+                                <li><a href="{% url 'blog:detail' article.slug %}">{{ article.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                {% endfor %}
+                <!-- My Service End -->
+
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+
+{% endblock %}

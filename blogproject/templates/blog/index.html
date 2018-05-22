@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+<!--
+    static 模板标签位于 staticfiles 模块中,只有通过 load 模板标签将该模块引入后,
+    才能在模板中使用 { % static % } 标签.
+    用 { % % } 包裹起来的叫做模板标签,用 { { } } 包裹起来的叫做模板变量,其作用是在最终渲染的模板里显示由视图函数传过来的变量值.
+-->
+
+{% load custom_markdown %}
+
+{% block title %}首页-倦了请直说{% endblock %}
+
+{% block sub_title %}
+
+    <div class="sub-title">
+        <h2>首页</h2>
+        <a href="{% url 'blog:index' %}"><i class="icon-home"></i></a>
+    </div>
+
+{% endblock %}
+
+{% block content_page %}
+
+    <div class="col-md-12 content-page">
+
+        {% for article in article_list %}
+            <!-- 用 { % for % } 模板标签 循环显示文章的数据 -->
+
+            <!-- Blog Post Start -->
+            <div class="col-md-12 blog-post">
+                <div class="post-title">
+                    <a href="{% url 'blog:detail' article.slug %}"><h1>{{ article.title }}</h1>
+                    </a>
+                </div>
+
+                <div class="post-info">
+                    <span>{{ article.created_time | date:"F j, Y" }} / by {{ article.author }}</span>
+                </div>
+
+                <p>{{ article.body | safe | custom_markdown | truncatechars_html:300 }}</p>
+                <a href="{% url 'blog:detail' article.slug %}"
+                   class="button button-style button-anim fa fa-long-arrow-right"><span>继续阅读</span></a>
+            </div>
+            <!-- Blog Post End -->
+
+        {% empty %}
+            <!-- 当 articles 为空,即数据库里没有文章时显示 { % empty % } 下面的内容 -->
+
+            <div class="post-image">
+                <img src="{% static 'blog/images/bg/NoneArticle.jpg' %}" alt="">
+            </div>
+
+        {% endfor %}
+        <!-- { % endfor % } 告诉 Django 结束循环 -->
+
+        <div class="col-md-12 text-center">
+            <a href="javascript:void(0)" id="load-more-post"
+               class="load-more-button">More</a>
+            <div id="post-end-message"></div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+

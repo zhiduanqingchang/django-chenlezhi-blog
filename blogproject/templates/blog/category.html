@@ -1,0 +1,75 @@
+﻿{% extends 'base.html' %}
+
+{% load staticfiles %}
+<!--
+    static 模板标签位于 staticfiles 模块中,只有通过 load 模板标签将该模块引入后,
+    才能在模板中使用 { % static % } 标签.
+    用 { % % } 包裹起来的叫做模板标签,用 { { } } 包裹起来的叫做模板变量,其作用是在最终渲染的模板里显示由视图函数传过来的变量值.
+-->
+{% load custom_markdown %}
+
+{% block title %}分类-倦了请直说{% endblock %}
+
+{% block sub_title %}
+
+    <div class="sub-title">
+        <h2>分类</h2>
+        <a href="{% url 'blog:index' %}"><i class="icon-home"></i></a>
+    </div>
+
+{% endblock %}
+
+{% block content_page %}
+
+    <div class="col-md-12 content-page">
+        <div class="col-md-12 blog-post">
+
+            <!-- Portfolio Start -->
+            <div>
+
+                {% for categories in catedory_list %}
+                    <!-- Portfolio Detail Start -->
+                    <div class="row portfolio">
+
+                        <div class="col-sm-6 custom-pad-2">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+
+                                    <tr>
+                                        <td><b>文章分类</b></td>
+                                        <td><a href="{% url 'blog:category' categories.slug %}">{{ categories.name }}</a></td>
+>
+                                        <td><b>分类描述</b></td>
+                                        <td>{{ categories.declare | safe | custom_markdown }}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><b>文章数量</b></td>
+                                        <td><a href="{% url 'blog:category' categories.slug %}">{{ categories.article_num }}</a></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Portfolio Detail End -->
+
+                {% endfor %}
+                <!-- { % endfor % } 告诉 Django 结束循环 -->
+
+            </div>
+            <!-- Portfolio End -->
+
+        </div>
+
+        <div class="col-md-12 text-center">
+            <a href="javascript:void(0)" id="load-more-portfolio" class="load-more-button">More</a>
+            <div id="portfolio-end-message"></div>
+        </div>
+
+    </div>
+
+{% endblock %}
