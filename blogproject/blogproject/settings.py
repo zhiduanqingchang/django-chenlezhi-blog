@@ -27,9 +27,10 @@ SECRET_KEY = '5(=&a7b#8q9*87-08_jox&vxe2qjbn2e29hy0p6(%7o@!l4qp2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
+# 为了安全起见，在生产环境下需要关闭 DEBUG 选项以及设置允许访问的域名
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '.chenlezhi.com']
+# ALLOWED_HOSTS 是允许访问的域名列表,127.0.0.1 和 localhost 是本地访问的域名,.chenlezhi.com 是访问服务器的域名.
+# 域名前加一个点表示允许访问该域名下的子域名,比如 www.chenlezhi.com、test.chenlezhi.com 等二级域名同样允许访问.如果不加前面的点则只允许访问 chenlezhi.com.
 
 # Application definition
 
