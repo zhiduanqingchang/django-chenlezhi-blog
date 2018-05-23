@@ -39,7 +39,8 @@
                                     <tr>
                                         <td><b>文章分类</b></td>
                                         <td><a href="{% url 'blog:category' categories.slug %}">{{ categories.name }}</a></td>
->
+                                    </tr>
+                                    <tr>
                                         <td><b>分类描述</b></td>
                                         <td>{{ categories.declare | safe | custom_markdown }}</td>
                                     </tr>
