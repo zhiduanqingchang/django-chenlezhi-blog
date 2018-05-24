@@ -52,7 +52,7 @@ class Category(models.Model):
     name = models.CharField('类名', max_length=100)
     # ChenHuan 2018/5/17 16:36 文章分类的类名
 
-    declare = models.TextField('分类描述', max_length=300, blank=True, null=True)
+    declare = models.TextField('分类描述', blank=True, null=True)
     # ChenHuan 2017/4/7 13:13 文章分类的说明
 
     slug = models.SlugField('slug', blank=True)
