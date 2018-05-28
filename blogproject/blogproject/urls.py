@@ -20,6 +20,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'', include('blog.urls', namespace='blog', app_name='blog')),
     url(r'^blog/', include('blog.urls', namespace='blog', app_name='blog')),
     # ChenHuan 2018/5/17 17:58 其中namespace参数为我们指定了命名空间,
     # 这说明这个urls.py中的url是blog app下的,这样即使不同的app下有相同url也不会冲突了.

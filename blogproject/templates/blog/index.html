@@ -9,7 +9,7 @@
 
 {% load custom_markdown %}
 
-{% block title %}首页-倦了请直说{% endblock %}
+{% block title %}首页-CHENLEZHI工作学习笔记{% endblock %}
 
 {% block sub_title %}
 
@@ -38,7 +38,7 @@
                     <span>{{ article.created_time | date:"F j, Y" }} / by {{ article.author }}</span>
                 </div>
 
-                <p>{{ article.body | safe | custom_markdown | truncatechars_html:300 }}</p>
+                <p>{{ article.body | safe | custom_markdown | truncatechars_html:100 }}</p>
                 <a href="{% url 'blog:detail' article.slug %}"
                    class="button button-style button-anim fa fa-long-arrow-right"><span>继续阅读</span></a>
             </div>

@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5(=&a7b#8q9*87-08_jox&vxe2qjbn2e29hy0p6(%7o@!l4qp2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # 为了安全起见，在生产环境下需要关闭 DEBUG 选项以及设置允许访问的域名
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '.chenlezhi.com']
 # ALLOWED_HOSTS 是允许访问的域名列表,127.0.0.1 和 localhost 是本地访问的域名,.chenlezhi.com 是访问服务器的域名.
@@ -144,7 +144,7 @@ USE_I18N = True
 USE_L10N = True
 
 # ChenHuan 2018/5/17 15:30 开启Django的时区功能
-USE_TZ = True
+USE_TZ = False
 
 DATETIME_FORMAT = 'Y-m-d H:i:s'
 DATE_FORMAT = 'Y-m-d'
@@ -157,11 +157,12 @@ DATE_FORMAT = 'Y-m-d'
 STATIC_URL = '/static/'
 
 # ChenHuan 2018/5/17 22:53 静态文件绝对路径
-STATIC_PATH = os.path.join(BASE_DIR, 'blog/static')
+#STATIC_PATH = os.path.join(BASE_DIR, 'blog/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'blog/static')
 # ChenHuan 2018/5/17 22:54 表示是一个列表,放各个app的static目录及公共的static目录
-STATICFILES_DIRS = (
-    STATIC_PATH,
-)
+#STATICFILES_DIRS = (
+#    STATIC_PATH,
+#)
 
 # ChenHuan 2018/5/17 22:55 另一种设置 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
@@ -195,7 +196,7 @@ CKEDITOR_UPLOAD_PATH = "images"
 
 SUIT_CONFIG = {
     # ChenHuan 2018/5/22 17:58 suit页面配置
-    'ADMIN_NAME': '倦了请直说-博客',
+    'ADMIN_NAME': 'CHENLEZHI工作学习笔记',
     # ChenHuan 2018/5/22 17:58 登录界面提示
     'LIST_PER_PAGE': 20,
     'MENU': ({'label': u'文章', 'app': 'blog', 'models': ('blog.Article',)},
